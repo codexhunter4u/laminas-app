@@ -100,7 +100,7 @@ class UserController extends AbstractActionController
         if (!$form->isValid()) {
             return $viewData;
         }
-        
+
         $this->table->saveuser($user);
 
         return $this->redirect()->toRoute('user', ['action' => 'index']);
