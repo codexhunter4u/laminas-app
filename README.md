@@ -1,2 +1,2 @@
 # laminas-app
-Laminas demo curp application
+Laminas demo curp application.
