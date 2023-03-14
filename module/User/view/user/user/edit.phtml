@@ -1,0 +1,80 @@
+<?php
+    $title = 'Edit User';
+    $this->headTitle($title);
+?>
+<h1><?= $this->escapeHtml($title) ?></h1>
+<?php
+    $firstname = $form->get('firstname');
+    $firstname->setAttribute('class', 'form-control');
+    $firstname->setAttribute('placeholder', 'First Name');
+
+    $lastname = $form->get('lastname');
+    $lastname->setAttribute('class', 'form-control');
+    $lastname->setAttribute('placeholder', 'Last Name');
+
+    $email = $form->get('email');
+    $email->setAttribute('class', 'form-control');
+    $email->setAttribute('placeholder', 'Email');
+
+    $contact = $form->get('contact');
+    $contact->setAttribute('class', 'form-control');
+    $contact->setAttribute('placeholder', 'Contact No');
+
+    $photo = $form->get('profilephoto');
+    $photo->setAttribute('class', 'form-control');
+    
+    // On edit if file is not selected then keep older value as it is
+    $hiddenFile = $form->get('uploadedFile');
+    $hiddenFile->setAttribute('value', $photo->getValue());
+
+    $submit = $form->get('submit');
+    $submit->setAttribute('class', 'btn btn-primary');
+
+    $form->setAttribute('action', $this->url('user', [
+        'action' => 'edit',
+        'id'     => $id,
+    ]));
+    $form->prepare();
+
+    echo $this->form()->openTag($form);
+?>
+<div class="form-group">
+    <?= $this->formLabel($firstname) ?>
+    <?= $this->formElement($firstname) ?>
+    <?= $this->formElementErrors()->render($firstname, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($lastname) ?>
+    <?= $this->formElement($lastname) ?>
+    <?= $this->formElementErrors()->render($lastname, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($email) ?>
+    <?= $this->formElement($email) ?>
+    <?= $this->formElementErrors()->render($email, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($contact) ?>
+    <?= $this->formElement($contact) ?>
+    <?= $this->formElementErrors()->render($contact, ['class' => 'help-block']) ?>
+</div>
+
+<div class="form-group">
+    <?= $this->formLabel($photo) ?>
+    <?= $this->formFile($photo) ?>
+    <?= $this->formElementErrors()->render($photo, ['class' => 'help-block']) ?>
+</div>
+
+<!-- On edit if file is not selected then keep older value as it is -->
+<div class="form-group">
+    <?= $this->formElement($hiddenFile) ?>
+</div>
+
+<?php
+    echo $this->formSubmit($submit);
+    echo $this->formHidden($form->get('id'));
+    echo $this->form()->closeTag();
+?>

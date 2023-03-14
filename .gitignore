@@ -1,0 +1,7 @@
+.vagrant/
+vendor/
+data/cache/*
+public/img/*
+!data/cache/.gitkeep
+phpunit.xml
+.phpunit.result.cache

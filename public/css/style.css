@@ -1,0 +1,24 @@
+:root {
+    --brand-color: #013755;
+}
+
+.navbar {
+    background-color: var(--brand-color);
+}
+
+.btn-primary {
+    background-color: var(--brand-color);
+    border-color: var(--brand-color);
+}
+.help-block > li {
+    list-style-type: none;
+    margin-left: -2rem; 
+    padding: 5px;
+    color: red;
+}
+ul.navbar-nav > li > a {
+    text-decoration: none;
+    display: block;
+    padding: 0.5rem 0.5rem;
+    color: #fff;
+}
