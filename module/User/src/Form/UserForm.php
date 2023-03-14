@@ -1,12 +1,5 @@
 <?php
 
-/**
- * User form
- *
- * PHP version 8.2
- *
- * @author Mohan Jadhav <m.jadhav@easternenterprise.com>
- */
 declare(strict_types=1);
 
 namespace User\Form;
@@ -18,7 +11,10 @@ use Laminas\Form\Element\File;
 
 class UserForm extends Form
 {
-    public function __construct($name = null)
+    /**
+     * @param string $name
+     */
+    public function __construct(string $name = null)
     {
         parent::__construct($name);
 
@@ -26,7 +22,7 @@ class UserForm extends Form
             'name' => 'id',
             'type' => 'hidden',
         ]);
-        
+
         $this->add([
             'name' => 'firstname',
             'type' => 'text',
@@ -34,6 +30,7 @@ class UserForm extends Form
                 'label' => 'First Name',
             ],
         ]);
+
         $this->add([
             'name' => 'lastname',
             'type' => 'text',
@@ -41,6 +38,7 @@ class UserForm extends Form
                 'label' => 'Last Name',
             ],
         ]);
+
         $this->add([
             'name' => 'email',
             'type' => 'email',
@@ -48,6 +46,7 @@ class UserForm extends Form
                 'label' => 'Email',
             ],
         ]);
+
         $this->add([
             'name' => 'contact',
             'type' => 'text',
@@ -55,6 +54,7 @@ class UserForm extends Form
                 'label' => 'Contact No',
             ],
         ]);
+
         $this->add([
             'name' => 'uploadedFile',
             'type' => Element\Hidden::class,
@@ -62,6 +62,7 @@ class UserForm extends Form
                 'value' => '',
             ],
         ]);
+
         $this->add([
             'name' => 'submit',
             'type' => 'submit',
@@ -76,8 +77,6 @@ class UserForm extends Form
     }
 
     /**
-     * Add file element
-     *
      * @return void
      */
     public function addElements(): void
@@ -91,11 +90,9 @@ class UserForm extends Form
     }
 
     /**
-     * Check file filter and Upload files
-     *
      * @return void
      */
-    public function addInputFilter()
+    public function addInputFilter(): void
     {
         $inputFilter = new InputFilter\InputFilter();
         $fileInput = new InputFilter\FileInput('profilephoto');
@@ -111,7 +108,6 @@ class UserForm extends Form
             ]
         );
         $inputFilter->add($fileInput);
-
         $this->setInputFilter($inputFilter);
     }
 }

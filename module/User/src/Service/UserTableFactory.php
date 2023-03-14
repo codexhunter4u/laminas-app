@@ -21,8 +21,11 @@ class UserTableFactory implements FactoryInterface
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): UserTable
-    {
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        ?array $options = null
+    ): UserTable {
         $tableGateway = $container->get('User\Model\UserTableGateway');
 
         return new UserTable($tableGateway);

@@ -1,12 +1,5 @@
 <?php
 
-/**
- * User Controller for all operation
- *
- * PHP version 8.2
- *
- * @author Mohan Jadhav <m.jadhav@easternenterprise.com>
- */
 declare(strict_types=1);
 
 namespace User\Controller;
@@ -23,8 +16,6 @@ class UserController extends AbstractActionController
     private UserTable $table;
 
     /**
-     * constructor function
-     *
      * @param UserTable $table
      */
     public function __construct(UserTable $table) {
@@ -32,8 +23,6 @@ class UserController extends AbstractActionController
     }
 
     /**
-     * Index method for listing of users
-     *
      * @return ViewModel
      */
     public function indexAction(): ViewModel
@@ -48,26 +37,25 @@ class UserController extends AbstractActionController
     }
 
     /**
-     * Create user function
-     *
      * @return array
      */
-    public function addAction():array
+    public function addAction(): array
     {
         $form = new UserForm('user');
         $request = $this->getRequest();
         
         if ($request->isPost()) {
             $user = new User();
-            // $form->setInputFilter($user->getInputFilter()); // if uncheck file will not upload
             $formData = array_merge_recursive(
                 $request->getPost()->toArray(),
                 $request->getFiles()->toArray()
             );
             $form->setData($formData);
+
             if (!$form->isValid()) {
                 return ['form' => $form];
             }
+
             $user->exchangeArray($form->getData());
             $this->table->saveUser($user);
 
@@ -78,13 +66,12 @@ class UserController extends AbstractActionController
     }
 
     /**
-     * User edit action
-     *
      * @return array
      */
     public function editAction(): array
     {
         $id = (int) $this->params()->fromRoute('id');
+
         if (0 === $id) {
             return $this->redirect()->toRoute('user', ['action' => 'add']);
         }
@@ -99,37 +86,42 @@ class UserController extends AbstractActionController
         $form->bind($user);
         $request = $this->getRequest();
         $viewData = ['id' => $id, 'form' => $form];
+
         if (!$request->isPost()) {
             return $viewData;
         }
-        // $form->setInputFilter($user->getInputFilter()); // if uncheck file will not upload
+
         $postData = array_merge_recursive(
             $request->getPost()->toArray(),
             $request->getFiles()->toArray()
         );
         $form->setData($postData);
+
         if (!$form->isValid()) {
             return $viewData;
         }
+        
         $this->table->saveuser($user);
 
         return $this->redirect()->toRoute('user', ['action' => 'index']);
     }
 
     /**
-     * User delete function
-     *
      * @return array
      */
     public function deleteAction(): array
     {
         $id = (int) $this->params()->fromRoute('id');
+
         if (!$id) {
             return $this->redirect()->toRoute('user');
         }
+
         $request = $this->getRequest();
+
         if ($request->isPost()) {
             $confirmDelete = $request->getPost('del', 'No');
+
             if ($confirmDelete == 'Yes') {
                 $id = (int) $request->getPost('id');
                 $this->table->deleteUser($id);

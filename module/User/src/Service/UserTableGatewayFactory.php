@@ -4,7 +4,6 @@ declare(strict_types=1);
 
 namespace User\Service;
 
-
 use User\Model\User;
 use Laminas\Db\ResultSet\ResultSet;
 use Psr\Container\ContainerInterface;
@@ -25,8 +24,11 @@ class UserTableGatewayFactory implements FactoryInterface
      * @throws ContainerExceptionInterface
      * @throws NotFoundExceptionInterface
      */
-    public function __invoke(ContainerInterface $container, $requestedName, ?array $options = null): TableGateway
-    {
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        ?array $options = null
+    ): TableGateway {
         $dbAdapter = $container->get(AdapterInterface::class);
         $resultSetPrototype = new ResultSet();
         $resultSetPrototype->setArrayObjectPrototype(new User());
