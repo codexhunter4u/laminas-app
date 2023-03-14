@@ -27,7 +27,7 @@
         </tr>
     </thead>
     <tbody>
-        <?php foreach ($this->paginator as $key => $user) : ?>
+        <?php foreach ($this->paginator as $key => $user): ?>
             <tr>
                 <td><?= $key+1 ?></td>
                 <td><?= $this->escapeHtml($user->firstname) ?></td>

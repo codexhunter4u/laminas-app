@@ -1,17 +1,8 @@
 <?php
 
-/**
- * User Module config file
- *
- * PHP version 8.2
- *
- * @author Mohan Jadhav <m.jadhav@easternenterprise.com>
- */
-
 declare(strict_types=1);
 
 namespace User;
-
 
 use User\Model\User;
 use User\Model\UserTable;
@@ -26,12 +17,18 @@ use Laminas\ModuleManager\Feature\ConfigProviderInterface;
 
 class Module implements ConfigProviderInterface
 {
+    /**
+     * {@inheritDoc}
+     */
     public function getConfig()
     {
         return include __DIR__ . '/../config/module.config.php';
     }
 
-    public function getControllerConfig(): array
+    /**
+     * {@inheritDoc}
+     */
+    public function getControllerConfig()
     {
         return [
             'factories' => [
@@ -40,7 +37,10 @@ class Module implements ConfigProviderInterface
         ];
     }
 
-    public function getServiceConfig(): array
+    /**
+     * {@inheritDoc}
+     */
+    public function getServiceConfig()
     {
         return [
             'factories' => [

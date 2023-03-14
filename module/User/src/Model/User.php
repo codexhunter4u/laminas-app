@@ -1,12 +1,5 @@
 <?php
 
-/**
- * User form
- *
- * PHP version 8.2
- *
- * @author Mohan Jadhav <m.jadhav@easternenterprise.com>
- */
 namespace User\Model;
 
 use DomainException;
@@ -28,8 +21,6 @@ class User
     private $inputFilter;
 
     /**
-     * Set formdata
-     *
      * @param array $data
      * 
      * @return void
@@ -46,9 +37,7 @@ class User
     }
 
     /**
-     * Copy form data for edit
-     *
-     * @return void
+     * @return array
      */
     public function getArrayCopy(): array
     {
@@ -63,8 +52,6 @@ class User
     }
 
     /**
-     * Sanitize input data
-     *
      * @param InputFilterInterface $inputFilter
      * 
      * @return void
@@ -75,8 +62,6 @@ class User
     }
 
     /**
-     * Filter the user entity data
-     *
      * @return array
      */
     public function getInputFilter(): array
@@ -84,7 +69,9 @@ class User
         if ($this->inputFilter) {
             return $this->inputFIlter;
         }
+
         $inputFilter = new InputFilter();
+
         $inputFilter->add([
             'name' => 'id',
             'required' => true,
@@ -92,6 +79,7 @@ class User
                 ['name' => ToInt::class],
             ],
         ]);
+
         $inputFilter->add([
             'name' => 'firstname',
             'required' => true,
@@ -110,6 +98,7 @@ class User
                 ]
             ]
         ]);
+
         $inputFilter->add([
             'name' => 'lastname',
             'required' => true,
@@ -128,6 +117,7 @@ class User
                 ]
             ]
         ]);
+
         $inputFilter->add([
             'name' => 'contact',
             'required' => true,
@@ -135,6 +125,7 @@ class User
                 ['name' => ToInt::class],
             ]
         ]);
+
         $inputFilter->add([
             'name' => 'email',
             'required' => true,
@@ -151,6 +142,7 @@ class User
                 ]
             ]
         ]);
+        
         $this->inputFilter = $inputFilter;
 
         return $this->inputFilter;

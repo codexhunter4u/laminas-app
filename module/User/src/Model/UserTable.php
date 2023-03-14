@@ -1,12 +1,5 @@
 <?php
 
-/**
- * User entity
- *
- * PHP version 8.2
- *
- * @author Mohan Jadhav <m.jadhav@easternenterprise.com>
- */
 namespace User\Model;
 
 use User\Model\User;
@@ -22,8 +15,6 @@ class UserTable
     private TableGatewayInterface $tableGateway;
 
     /**
-     * Constructor function
-     *
      * @param TableGatewayInterface $tableGateway
      */
     public function __construct(TableGatewayInterface $tableGateway)
@@ -32,8 +23,6 @@ class UserTable
     }
 
     /**
-     * Fetch all records from user table
-     *
      * @param boolean $paginated
      * 
      * @return Paginator
@@ -48,8 +37,6 @@ class UserTable
     }
 
     /**
-     * Apply pagination
-     *
      * @param Paginator
      * 
      * @return void
@@ -65,8 +52,6 @@ class UserTable
     }
 
     /**
-     * Fetch all records from user table
-     *
      * @param int $id
      * 
      * @return User
@@ -85,11 +70,9 @@ class UserTable
     }
 
     /**
-     * Save user function
-     *
      * @param User $user
      * 
-     * @return void
+     * @return void|int|RuntimeException
      */
     public function saveUser(User $user)
     {
@@ -101,6 +84,7 @@ class UserTable
             'profilephoto' => $this->getFiles($user),
         ];
         $id = (int) $user->id;
+
         if ($id === 0) {
             $this->tableGateway->insert($data);
 
@@ -119,8 +103,6 @@ class UserTable
     }
 
     /**
-     * Delete user
-     *
      * @param int $id
      * 
      * @return void
@@ -131,8 +113,6 @@ class UserTable
     }
 
     /**
-     * Uploaded file name return
-     *
      * @param User $user
      * 
      * @return string

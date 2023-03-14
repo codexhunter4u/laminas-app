@@ -1,12 +1,7 @@
 <?php
 
-/**
- * User module config file
- *
- * PHP version 8.2
- *
- * @author Mohan Jadhav <m.jadhav@easternenterprise.com>
- */
+declare(strict_types=1);
+
 namespace User;
 
 use Controller\UserController;

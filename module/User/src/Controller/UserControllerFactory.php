@@ -17,8 +17,11 @@ class UserControllerFactory implements FactoryInterface
      * 
      * @return UserController
      */
-    public function __invoke(ContainerInterface $container, $requestedName, array $options = null): UserController
-    {
+    public function __invoke(
+        ContainerInterface $container,
+        $requestedName,
+        array $options = null
+    ): UserController {
         return new UserController($container->get(UserTable::class));
     }
 }
